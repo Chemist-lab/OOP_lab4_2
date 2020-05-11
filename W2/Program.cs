@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace W2
 {
 
@@ -72,35 +72,33 @@ namespace W2
             sm.Add(new Sale_manager { Date = "14.11.2018", Count = 150, Name = "Ovoch4" });
             sm.Add(new Sale_manager { Date = "17.07.2017", Count = 241, Name = "Ovoch5" });
 
+            float[] temprPrice = new float[sm.Count];
+            Price_manager FoundData;
+            string name;
+            var sorPR = pr.OrderBy(o => o.Price).ToList();
+
+            
+
             // Сортування
-            for (int i = 0; i < sm.Count; i++)
+            List<Sale_manager> newsm = new List<Sale_manager>();
+            List<float> newsmp = new List<float>();
+            foreach (Sale_manager smx in sm)
             {
-                for (int k = 0; k < sm.Count; k++)
-                {
-                    float price1 = 0;
-                    float price2 = 0;
-                    for (int j = 0; j < pr.Count; j++)
-                    {
-                        if (pr[j].Name == sm[i].Name)
-                        {
-                            price1 = pr[j].Price * sm[i].Count;
-                        }
-                    }
-                    for (int d = 0; d < pr.Count; d++)
-                    {
-                        if (pr[d].Name == sm[k].Name)
-                        {
-                            price2 = pr[d].Price * sm[k].Count;
-                        }
-                    }
-                    if (price1 < price2)
-                    {
-                        Sale_manager SS = sm[k];
-                        sm[k] = sm[i];
-                        sm[i] = SS;
-                    }
-                }
+                newsmp.Add(FindType(smx, pr).Price * smx.Count);
+                newsm.Add(smx);
             }
+            int cnt = newsm.Count;
+            sm = new List<Sale_manager>();
+            for (int i = 0; i < cnt; i++)
+            {
+                int index = newsmp.IndexOf(newsmp.Max());
+                sm.Add(newsm[index]);
+                newsmp.RemoveAt(index);
+                newsm.RemoveAt(index);
+                
+            }
+            sm.Reverse();
+
 
             // Вивід таблиці
             float totalPrice = 0, totalTempPrice = 1;
@@ -127,11 +125,11 @@ namespace W2
             // Підрахунох всієї виручки
             foreach (Sale_manager s in sm)
             {
-                for (int i = 0; i < pr.Count; i++)
+                for (int i = 0; i < sorPR.Count; i++)
                 {
-                    if (s.Name == pr[i].Name)
+                    if (s.Name == sorPR[i].Name)
                     {
-                        tempPrice = pr[i].Price;
+                        tempPrice = sorPR[i].Price;
                         totalTempPrice = tempPrice * s.Count;
                     }
                 }
@@ -149,6 +147,18 @@ namespace W2
         {
             Console.OutputEncoding = Encoding.UTF8;
             SaleM();
+        }
+        static Price_manager FindType(Sale_manager Object, List<Price_manager> Types)
+        {
+            foreach (Price_manager x in Types)
+            {
+                if (Object.Name == x.Name)
+                {
+                    return x;
+
+                }
+            }
+            return null;
         }
     }
 }
