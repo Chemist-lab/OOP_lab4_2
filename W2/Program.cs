@@ -21,7 +21,7 @@ namespace W2
             set { price = value; }
         }
     }
-    public class Sale_manager 
+    public class Sale_manager
     {
         private string date;
         private string name;
@@ -44,7 +44,7 @@ namespace W2
         }
     }
 
-    
+
     class Program
     {
 
@@ -77,9 +77,21 @@ namespace W2
             string name;
             var sorPR = pr.OrderBy(o => o.Price).ToList();
 
-            
+
 
             // Сортування
+            for (int i = 0; i < sm.Count; i++)
+            {
+                for (int k = 0; k < sm.Count; k++)
+                {
+                    if (sm[i].Name == sm[k].Name && k != i)
+                    {
+                        sm[i].Count += sm[k].Count;
+                        sm[i].Date += "\n                              " + sm[k].Date;
+                        sm.Remove(sm[k]);
+                    }
+                }
+            }
             List<Sale_manager> newsm = new List<Sale_manager>();
             List<float> newsmp = new List<float>();
             foreach (Sale_manager smx in sm)
@@ -95,7 +107,7 @@ namespace W2
                 sm.Add(newsm[index]);
                 newsmp.RemoveAt(index);
                 newsm.RemoveAt(index);
-                
+
             }
             sm.Reverse();
 
@@ -111,12 +123,12 @@ namespace W2
             string cutPrice = "";
             foreach (Sale_manager s in sm)
             {
-                for(int i = 0; i < pr.Count; i++)
+                for (int i = 0; i < pr.Count; i++)
                 {
                     if (s.Name == pr[i].Name)
                     {
                         tempPrice = pr[i].Price * s.Count;
-                        Console.WriteLine("                    " + s.Name + "  │ " + s.Date + " │  " + s.Count + "  │  " + tempPrice);
+                        Console.WriteLine("                    " + s.Name + "    " + s.Date + "    " + s.Count + "     " + tempPrice);
                         Console.WriteLine("                  ╟─────────┼────────────┼───────┼────────────╢");
                     }
                 }
@@ -138,7 +150,7 @@ namespace W2
             }
             Console.WriteLine("                  ╟─────────┴────────────┴───────┴────────────╢");
             Console.WriteLine("                    Вартість виготовленої продукції: " + totalPrice);
-            
+
             Console.WriteLine("                  ╚═══════════════════════════════════════════╝");
             Console.ReadLine();
         }
