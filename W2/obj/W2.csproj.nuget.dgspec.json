@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Labs\\OOP\\GIT\\3\\OOP_lab4_2\\W2\\W2.csproj": {}
+    "D:\\Labs\\OOP\\GIT\\Lab6\\OOP_lab6_1\\W2\\W2.csproj": {}
   },
   "projects": {
-    "D:\\Labs\\OOP\\GIT\\3\\OOP_lab4_2\\W2\\W2.csproj": {
+    "D:\\Labs\\OOP\\GIT\\Lab6\\OOP_lab6_1\\W2\\W2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Labs\\OOP\\GIT\\3\\OOP_lab4_2\\W2\\W2.csproj",
+        "projectUniqueName": "D:\\Labs\\OOP\\GIT\\Lab6\\OOP_lab6_1\\W2\\W2.csproj",
         "projectName": "W2",
-        "projectPath": "D:\\Labs\\OOP\\GIT\\3\\OOP_lab4_2\\W2\\W2.csproj",
+        "projectPath": "D:\\Labs\\OOP\\GIT\\Lab6\\OOP_lab6_1\\W2\\W2.csproj",
         "packagesPath": "C:\\Users\\CHEMIST\\.nuget\\packages\\",
-        "outputPath": "D:\\Labs\\OOP\\GIT\\3\\OOP_lab4_2\\W2\\obj\\",
+        "outputPath": "D:\\Labs\\OOP\\GIT\\Lab6\\OOP_lab6_1\\W2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\CHEMIST\\AppData\\Roaming\\NuGet\\NuGet.Config",

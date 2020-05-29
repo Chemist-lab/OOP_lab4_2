@@ -4,6 +4,10 @@ using System.Text;
 using System.Linq;
 namespace W2
 {
+    public interface ISaleAdd
+    {
+        void samAdd(List<Sale_manager> sm);
+    }
 
     public class Price_manager
     {
@@ -21,7 +25,7 @@ namespace W2
             set { price = value; }
         }
     }
-    public class Sale_manager
+    public class Sale_manager : ISaleAdd
     {
         private string date;
         private string name;
@@ -42,25 +46,9 @@ namespace W2
             get { return count; }
             set { count = value; }
         }
-    }
 
-
-    class Program
-    {
-
-        static void SaleM()
+        public void samAdd(List<Sale_manager> sm)
         {
-            List<Sale_manager> sm = new List<Sale_manager>();
-            List<Price_manager> pr = new List<Price_manager>();
-
-            // Введення ціни та назви товару
-            pr.Add(new Price_manager { Price = 41.1f, Name = "Ovoch1" });
-            pr.Add(new Price_manager { Price = 24.6f, Name = "Ovoch2" });
-            pr.Add(new Price_manager { Price = 10.3f, Name = "Ovoch3" });
-            pr.Add(new Price_manager { Price = 32.9f, Name = "Ovoch4" });
-            pr.Add(new Price_manager { Price = 24.5f, Name = "Ovoch5" });
-
-            // Введення статистики продажу
             sm.Add(new Sale_manager { Date = "10.01.2010", Count = 140, Name = "Ovoch1" });
             sm.Add(new Sale_manager { Date = "29.11.2014", Count = 242, Name = "Ovoch2" });
             sm.Add(new Sale_manager { Date = "15.06.2020", Count = 420, Name = "Ovoch5" });
@@ -71,13 +59,41 @@ namespace W2
             sm.Add(new Sale_manager { Date = "16.06.2008", Count = 277, Name = "Ovoch2" });
             sm.Add(new Sale_manager { Date = "14.11.2018", Count = 150, Name = "Ovoch4" });
             sm.Add(new Sale_manager { Date = "17.07.2017", Count = 241, Name = "Ovoch5" });
+        }
+    }
+
+
+    class Program
+    {
+       
+
+        static void pramAdd(List<Price_manager> pr)
+        {
+            pr.Add(new Price_manager { Price = 41.1f, Name = "Ovoch1" });
+            pr.Add(new Price_manager { Price = 24.6f, Name = "Ovoch2" });
+            pr.Add(new Price_manager { Price = 10.3f, Name = "Ovoch3" });
+            pr.Add(new Price_manager { Price = 32.9f, Name = "Ovoch4" });
+            pr.Add(new Price_manager { Price = 24.5f, Name = "Ovoch5" });
+        }
+
+
+        static void SaleM()
+        {
+            List<Sale_manager> sm = new List<Sale_manager>();
+            List<Price_manager> pr = new List<Price_manager>();
+
+
+            // Введення ціни та назви товару
+            pramAdd(pr);
+
+            // Введення статистики продажу
+            Sale_manager smn = new Sale_manager();
+            smn.samAdd(sm);
 
             float[] temprPrice = new float[sm.Count];
             Price_manager FoundData;
             string name;
             var sorPR = pr.OrderBy(o => o.Price).ToList();
-
-
 
             // Сортування
             for (int i = 0; i < sm.Count; i++)
